@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">
+    <div class="d-flex justify-content-between align-items-center w-100">
+        <span>School Management System</span>
+        <div>
+            <button class="btn btn-link " [matMenuTriggerFor]="accountMenu">
+                <mat-icon class="text-white large-icon">account_circle</mat-icon>
+            </button>
+            <mat-menu #accountMenu="matMenu">
+                <button mat-menu-item (click)="logout()">
+                    <span>Logout</span>
+                </button>
+            </mat-menu>
+        </div>
+    </div>
+</mat-toolbar>
+<router-outlet></router-outlet>

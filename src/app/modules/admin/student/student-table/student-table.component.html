@@ -1,0 +1,115 @@
+<div class="table-responsive">
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8 table-responsive" [formGroup]="editForm">
+    <ng-container matColumnDef="serial">
+      <mat-header-cell *matHeaderCellDef>No.</mat-header-cell>
+      <mat-cell *matCellDef="let student; let i = index">{{ i+1 }}</mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let student">
+        <ng-container *ngIf="!student.editMode">{{ student.name }}</ng-container>
+        <ng-container *ngIf="student.editMode">
+          <mat-form-field>
+            <input matInput formControlName="name" name="name" placeholder="Name">
+          </mat-form-field>
+        </ng-container>
+      </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="filterType">
+      <mat-header-cell *matHeaderCellDef>Filter Type</mat-header-cell>
+      <mat-cell *matCellDef="let student">
+        <ng-container *ngIf="!student.editMode">{{ student.filterType }}</ng-container>
+        <ng-container *ngIf="student.editMode">
+          <!-- <mat-form-field>
+              <input matInput formControlName="filterType"  name="filterType" placeholder="FilterType">
+            </mat-form-field> -->
+          <mat-form-field class="w-100">
+            <mat-label>Filter Type</mat-label>
+            <mat-select formControlName="filterType">
+              <mat-option *ngFor="let filterType of filterTypes" [value]="filterType">{{ filterType }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </ng-container>
+      </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="year">
+      <mat-header-cell *matHeaderCellDef>Year</mat-header-cell>
+      <mat-cell *matCellDef="let student">
+        <ng-container *ngIf="!student.editMode">{{ student.year }}</ng-container>
+        <ng-container *ngIf="student.editMode">
+          <!-- <mat-form-field>
+              <input type="number" matInput formControlName="year"  name="year" placeholder="Year">
+            </mat-form-field> -->
+          <mat-form-field class="w-100">
+            <mat-label>Year</mat-label>
+            <mat-select formControlName="year">
+              <mat-option *ngFor="let year of studentService.availableYearEditRow | async" [value]="year">{{ year
+                }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </ng-container>
+      </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="className">
+      <mat-header-cell *matHeaderCellDef>Class Name</mat-header-cell>\
+      <mat-cell *matCellDef="let student">
+        <ng-container *ngIf="!student.editMode">{{ student.className }}</ng-container>
+        <ng-container *ngIf="student.editMode">
+          <!-- <mat-form-field>
+              <input matInput formControlName="className"  name="className" placeholder="ClassName">
+            </mat-form-field> -->
+          <mat-form-field class="w-100">
+            <mat-label>Class</mat-label>
+            <mat-select formControlName="className">
+              <mat-option *ngFor="let classOption of studentService.availableClassesEditRow | async"
+                [value]="classOption">{{ classOption }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </ng-container>
+      </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+      <mat-cell *matCellDef="let student;let i = index">
+        <div class="d-flex gap-3">
+          <button class="btn d-flex justify-content-center align-items-center btn-link" (click)="editStudent(student)"
+            *ngIf="!student.editMode">
+            <mat-icon>edit</mat-icon>
+          </button>
+  
+          <button class="btn d-flex justify-content-center align-items-center btn-link" (click)="viewStudent(student)"
+            *ngIf="!student.editMode">
+            <mat-icon>remove_red_eye</mat-icon>
+          </button>
+  
+          <button class="btn d-flex justify-content-center align-items-center btn-link" (click)="delete(student)"
+            *ngIf="!student.editMode">
+            <mat-icon class="text-danger">delete</mat-icon>
+          </button>
+  
+          <button class="btn d-flex justify-content-center align-items-center btn-success" (click)="saveStudent(student)"
+            *ngIf="student.editMode">
+            <mat-icon>done</mat-icon>
+          </button>
+  
+          <button class="btn d-flex justify-content-center align-items-center btn-danger" (click)="cancelEdit(student)"
+            *ngIf="student.editMode">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </div>
+      </mat-cell>
+    </ng-container>
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+  
+  <div class="d-flex justify-content-center align-items-center my-5" *ngIf="dataSource.length === 0">
+    <h2>No Student Found.</h2>
+  </div>
+</div>

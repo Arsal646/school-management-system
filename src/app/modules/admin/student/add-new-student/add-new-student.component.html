@@ -1,0 +1,98 @@
+<div class="container mt-4 mb-3">
+    <div class="row">
+        <div class="col-md-12 d-flex justify-content-end gap-3">
+            <button type="button" class="btn btn-secondary" (click)="closeForm()">Close</button>
+            <button type="button" class="btn btn-primary" (click)="saveStudent()">Save</button>
+        </div>
+    </div>
+    <h2 class="mb-3">Edit Student</h2>
+    <form [formGroup]="form">
+        <div class="card p-3">
+            <h2>basic Information</h2>
+            <div class="row ">
+                <div class="col-md-3 mb-3">
+                    <mat-form-field class="w-100">
+                        <mat-label>Name
+                        </mat-label>
+                        <input matInput formControlName="name" placeholder="Name">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <mat-form-field class="w-100">
+                        <mat-label>Filter Type</mat-label>
+                        <mat-select formControlName="filterType">
+                            <mat-option [value]="type" *ngFor="let type of studentService.getFilterTypes() | async">
+                                {{type}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <mat-form-field class="w-100">
+                        <mat-label>Year</mat-label>
+                        <mat-select formControlName="year">
+                            <mat-option [value]="year" *ngFor="let year of studentService.getYears() | async">
+                                {{year}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <mat-form-field class="w-100">
+                        <mat-label>Class Name</mat-label>
+                        <mat-select formControlName="className">
+                            <mat-option [value]="class" *ngFor="let class of studentService.getClasses() | async">
+                                {{class}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="card p-3 my-2">
+            <h2>Grade Information</h2>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <mat-form-field class="w-100">
+                        <mat-label>Subject 1</mat-label>
+                        <mat-select formControlName="subject1">
+                            <mat-option [value]="grade" *ngFor="let grade of studentService.getGrade() | async">
+                                {{grade}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <mat-form-field class="w-100">
+                        <mat-label>Subject 2</mat-label>
+                        <mat-select formControlName="subject2">
+                            <mat-option [value]="grade" *ngFor="let grade of studentService.getGrade() | async">
+                                {{grade}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <mat-form-field class="w-100">
+                        <mat-label>Subject 3</mat-label>
+                        <mat-select formControlName="subject3">
+                            <mat-option [value]="grade" *ngFor="let grade of studentService.getGrade() | async">
+                                {{grade}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+            </div>
+        </div>
+        <div class="card p-3 ">
+            <h2>Image</h2>
+            <div class="row">
+                <div class="form-group w-100">
+                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput
+                        (change)="imageUpload($event)" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,33 @@
+<form [formGroup]="form" (ngSubmit)="applyFilters()" class="needs-validation">
+    <div class="row align-items-center">
+      <div class="col-md-3 py-1">
+        <mat-form-field class="w-100">
+          <mat-label>Filter Type</mat-label>
+          <mat-select formControlName="type">
+            <mat-option *ngFor="let filterType of filterTypes" [value]="filterType">{{ filterType }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3 py-1">
+        <mat-form-field class="w-100">
+          <mat-label>Year</mat-label>
+          <mat-select formControlName="year">
+            <mat-option *ngFor="let year of studentService.availableYear | async" [value]="year">{{ year }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3 py-1">
+        <mat-form-field class="w-100">
+          <mat-label>Class</mat-label>
+          <mat-select formControlName="class">
+            <mat-option *ngFor="let classOption of studentService.availableClasses | async" [value]="classOption">{{ classOption }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3 d-flex gap-3 py-1">
+        <button type="submit" class="btn btn-primary">Apply Filter</button>
+        <button class="btn btn-danger" (click)="clearAll()">Clear Filter</button>
+      </div>
+    </div>
+  </form>
+  

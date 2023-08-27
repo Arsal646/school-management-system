@@ -1,0 +1,73 @@
+<div class="container mt-4 mb-3">
+  <div class="row">
+    <div class="col-md-12 d-flex justify-content-end gap-3">
+      <button type="button" class="btn btn-secondary" (click)="closeForm()">Close</button>
+    </div>
+  </div>
+  <h2 class="mb-3">Student Details</h2>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card p-4">
+        <h2 class="mb-3">Basic Information</h2>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <strong>Name:</strong>
+            <p>{{ studentDetail.name }}</p>
+          </div>
+          <div class="col-md-6 mb-3">
+            <strong>Filter Type:</strong>
+            <p>{{ studentDetail.filterType }}</p>
+          </div>
+          <div class="col-md-6 mb-3">
+            <strong>Year:</strong>
+            <p>{{ studentDetail.year }}</p>
+          </div>
+          <div class="col-md-6 mb-3">
+            <strong>Class Name:</strong>
+            <p>{{ studentDetail.className }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="card p-4 my-3">
+        <h2 class="mb-3">Grade Information</h2>
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <strong>Subject 1:</strong>
+            <p *ngIf="studentDetail.subject1; else NoGrade"> {{ studentDetail.subject1 }}</p>
+          </div>
+          <div class="col-md-4 mb-3">
+            <strong>Subject 2:</strong>
+            <p *ngIf="studentDetail.subject2; else NoGrade"> {{ studentDetail.subject2 }}</p>
+          </div>
+          <div class="col-md-4 mb-3">
+            <strong>Subject 3:</strong>
+            <p *ngIf="studentDetail.subject3; else NoGrade"> {{ studentDetail.subject3 }}</p>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #NoGrade>
+        <p>Not Found.</p>
+      </ng-template>
+
+    </div>
+    <div class="col-md-6">
+      <div class="card p-4">
+        <h2 class="mb-3">Image</h2>
+        <div class="row">
+          <div class="col-md-12" *ngIf="studentDetail.image; else NoImage">
+            <img [src]="studentDetail.image || 'path-to-default-image.png'" alt="Student Image" class="img-fluid">
+          </div>
+        </div>
+        <ng-template #NoImage>
+          <div class="row">
+            <div class="col-md-12 d-flex justify-content-center align-items-center">
+              <h2>No Image Found.</h2>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+  </div>
+</div>

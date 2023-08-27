@@ -1,0 +1,13 @@
+::ng-deep .cdk-global-overlay-wrapper {
+    display: flex;
+    position: absolute;
+    z-index: 1000;
+    overflow: auto;
+    pointer-events: auto;  
+  }
+
+  @media(max-width:900px){
+    .mdc-data-table__cell , .mdc-data-table__header-cell {
+      min-width: 200px;
+  }
+  }
